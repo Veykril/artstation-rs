@@ -1,0 +1,21 @@
+#[derive(Serialize, Deserialize)]
+pub struct Job {
+    pub id: i64,
+    pub hash_id: String,
+    pub title: String,
+    pub company_name: String,
+    pub city: String,
+    pub state: String,
+    pub country: String,
+    pub thumb_url: String,
+    pub location_formatted: String,
+    pub description: String,
+    pub skills: String,
+    pub about: String,
+    pub how_to_apply: String,
+    pub job_type: String,
+    pub work_remotely: bool,
+    pub offer_relocation: bool,
+    pub approved_at: String,
+    pub featured: bool,
+}
