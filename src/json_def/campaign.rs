@@ -9,7 +9,7 @@ pub struct CampaignAsset {
     width: i64,
     height: i64,
     image_url: String,
-    impression_tracking_tag: Option<()>,
+    impression_tracking_tag: Option<String>,
     asset_type: String,
     asset_size: String,
     id: i64,

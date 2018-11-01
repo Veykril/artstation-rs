@@ -17,6 +17,7 @@ pub use self::jobs::*;
 
 use serde::{Deserialize, Deserializer};
 
+#[allow(dead_code)]
 pub(crate) fn nullable_priority<'de, D, T>(deserializer: D) -> std::result::Result<T, D::Error>
 where
     D: Deserializer<'de>,
@@ -24,4 +25,19 @@ where
 {
     let opt = Option::deserialize(deserializer)?;
     Ok(opt.unwrap_or_default())
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct UnknownField;
+
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Skill {
+    pub name: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct SoftwareItem {
+    pub name: String,
+    pub icon_url: String,
 }

@@ -1,9 +1,6 @@
 // todo figure out unknown fields and optional fields(nullable fields)
 
-use super::nullable_priority;
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct UnknownField;
+use super::UnknownField;
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Profile {
@@ -13,14 +10,14 @@ pub struct Profile {
     pub badges: Vec<UnknownField>,
     pub collections_count: i64,
     pub has_pro_permissions: bool,
-    pub portfolio_display_settings_albums: Vec<UnknownField>,
+    pub portfolio_display_settings_albums: Vec<PortfolioDisplaySettingsAlbums>,
     pub display_portfolio_as_albums: bool,
-    pub show_all_projects_album: Option<UnknownField>,
+    pub show_all_projects_album: Option<bool>,
     pub albums_with_community_projects: Vec<AlbumsWithCommunityProject>,
     pub profile_default_album: ProfileDefaultAlbum,
     pub social_profiles: Vec<SocialProfile>,
-    pub skills: Vec<Skill>,
-    pub software_items: Vec<SoftwareItem>,
+    pub skills: Vec<super::Skill>,
+    pub software_items: Vec<super::SoftwareItem>,
     pub experience_items: Vec<ExperienceItem>,
     pub user_productions: Vec<UnknownField>,
     pub portfolio: Portfolio,
@@ -45,10 +42,8 @@ pub struct Profile {
     pub country: String,
     pub permalink: String,
     pub cover_file_name: Option<String>,
-    #[serde(deserialize_with = "nullable_priority")]
-    pub cover_width: i64,
-    #[serde(deserialize_with = "nullable_priority")]
-    pub cover_height: i64,
+    pub cover_width: Option<i64>,
+    pub cover_height: Option<i64>,
     pub availability: String,
     pub available_full_time: bool,
     pub available_contract: bool,
@@ -90,10 +85,8 @@ pub struct AlbumsWithCommunityProject {
     pub total_projects: i64,
     pub website_projects_count: i64,
     pub public_projects_count: i64,
-    #[serde(deserialize_with = "nullable_priority")]
-    pub profile_visibility: bool,
-    #[serde(deserialize_with = "nullable_priority")]
-    pub website_visibility: bool,
+    pub profile_visibility: Option<bool>,
+    pub website_visibility: Option<bool>,
     pub album_type: String,
 }
 
@@ -109,17 +102,6 @@ pub struct SocialProfile {
     pub url: String,
     pub social_network: String,
     pub position: i64,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct Skill {
-    pub name: String,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct SoftwareItem {
-    pub icon_url: String,
-    pub name: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -146,7 +128,7 @@ pub struct Portfolio {
     pub summary_as_html: String,
     pub resume_url: Option<String>,
     pub summary: Option<String>,
-    pub demo_reel_code: Option<UnknownField>,
+    pub demo_reel_code: Option<String>,
     pub demo_reel_url: Option<String>,
 }
 
@@ -155,4 +137,10 @@ pub struct PortfolioDisplaySettings {
     pub profile_default_album_id: i64,
     pub website_default_album_id: i64,
     pub display_portfolio_as_albums: bool,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct PortfolioDisplaySettingsAlbums {
+    id: i64,
+    title: String,
 }

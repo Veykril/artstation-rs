@@ -20,17 +20,6 @@ pub struct Follower {
     pub large_avatar_url: String,
     pub is_staff: bool,
     pub sample_projects: Vec<String>,
-    pub skills: Vec<Skill>,
-    pub software_items: Vec<SoftwareItem>,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct Skill {
-    pub name: String,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct SoftwareItem {
-    pub name: String,
-    pub icon_url: String,
+    pub skills: Vec<super::Skill>,
+    pub software_items: Vec<super::SoftwareItem>,
 }

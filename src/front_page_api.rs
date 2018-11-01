@@ -1,7 +1,7 @@
 use ARTSTATION_URL;
 
 use http::Method;
-use request::ApiRequestBuilder;
+use request::{ApiRequestBuilder, request_types::*};
 use reqwest::Client;
 
 static TOP_ROW_ITEMS: &str = "/top_row_items.json";
@@ -35,7 +35,7 @@ impl<'a> FrontPageApi<'a> {
         )
     }
 
-    pub fn projects(&self) -> ApiRequestBuilder<::users_api::ProjectsRequest> {
+    pub fn projects(&self) -> ApiRequestBuilder<ProjectsRequest> {
         ApiRequestBuilder::new(
             self.client.clone(),
             Method::GET,
@@ -50,12 +50,4 @@ impl<'a> FrontPageApi<'a> {
             &[ARTSTATION_URL, JOBS].concat(),
         )
     }
-}
-
-use json_def::*;
-use request::*;
-make_request! {
-    TopRowItemsRequest = Vec<TopRowItem> with LimitQuery;
-    CampaignInfoRequest = Campaign with SizeQuery, TakeOverQuery;
-    JobsRequest = Vec<Job> with FeaturedQuery, LimitQuery;
 }

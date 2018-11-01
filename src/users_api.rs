@@ -1,7 +1,7 @@
 use ARTSTATION_URL;
 
 use http::Method;
-use request::ApiRequestBuilder;
+use request::{ApiRequestBuilder, request_types::*};
 use reqwest::Client;
 
 static USERS_API: &str = "/users/";
@@ -58,15 +58,4 @@ impl<'a, 'b> UserApi<'a, 'b> {
             &self.craft_url(SUBMISSIONS),
         )
     }
-}
-
-use json_def::*;
-use request::JsonPagedResponse;
-make_request! {
-    ProjectsRequest = JsonPagedResponse<Project>;
-    ProfileRequest = Profile;
-    FollowersRequest = JsonPagedResponse<Follower>;
-    FollowingsRequest = JsonPagedResponse<Follower>;
-    SubmissionsRequest = JsonPagedResponse<Submission>;
-    LikesRequest = JsonPagedResponse<Like>;
 }

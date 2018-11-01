@@ -7,6 +7,7 @@ pub trait PageQuery: ArtStationRequest {}
 pub trait TakeOverQuery: ArtStationRequest {}
 pub trait SizeQuery: ArtStationRequest {}
 pub trait FeaturedQuery: ArtStationRequest {}
+pub trait AlbumIdQuery: ArtStationRequest {}
 
 pub trait ArtStationRequest {
     type Response: ArtStationResponse;
@@ -124,6 +125,13 @@ impl<R: FeaturedQuery> ApiRequestBuilder<R> {
     }
 }
 
+impl<R: AlbumIdQuery> ApiRequestBuilder<R> {
+    pub fn album_id(mut self, id: u32) -> Self {
+        self.request_builder = self.request_builder.query(&[("album_id", id)]);
+        self
+    }
+}
+
 impl<S, T> PageQuery for S
 where
     T: ArtStationResponse + DeserializeOwned,
@@ -160,4 +168,20 @@ macro_rules! make_request {
         )*
         make_request!($($tail)*);
     };
+}
+
+pub mod request_types {
+    use super::*;
+    use json_def::*;
+    make_request! {
+        ProjectsRequest = JsonPagedResponse<Project> with AlbumIdQuery;
+        ProfileRequest = Profile;
+        FollowersRequest = JsonPagedResponse<Follower>;
+        FollowingsRequest = JsonPagedResponse<Follower>;
+        SubmissionsRequest = JsonPagedResponse<Submission>;
+        LikesRequest = JsonPagedResponse<Like>;
+        TopRowItemsRequest = Vec<TopRowItem> with LimitQuery;
+        CampaignInfoRequest = Campaign with SizeQuery, TakeOverQuery;
+        JobsRequest = Vec<Job> with FeaturedQuery, LimitQuery;
+    }
 }
