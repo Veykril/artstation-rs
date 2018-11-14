@@ -30,7 +30,6 @@ where
 #[derive(Debug, Deserialize, Serialize)]
 pub struct UnknownField;
 
-
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Skill {
     pub name: String,

@@ -136,7 +136,8 @@ impl<S, T> PageQuery for S
 where
     T: ArtStationResponse + DeserializeOwned,
     S: ArtStationRequest<Response = JsonPagedResponse<T>>,
-{}
+{
+}
 
 macro_rules! make_request {
     () => {};

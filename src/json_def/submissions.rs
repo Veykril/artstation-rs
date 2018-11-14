@@ -1,4 +1,3 @@
-
 #[derive(Serialize, Deserialize)]
 pub struct Submission {
     pub id: i64,

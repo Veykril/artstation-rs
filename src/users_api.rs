@@ -1,7 +1,7 @@
 use ARTSTATION_URL;
 
 use http::Method;
-use request::{ApiRequestBuilder, request_types::*};
+use request::{request_types::*, ApiRequestBuilder};
 use reqwest::Client;
 
 static USERS_API: &str = "/users/";

@@ -1,7 +1,7 @@
 use ARTSTATION_URL;
 
 use http::Method;
-use request::{ApiRequestBuilder, request_types::*};
+use request::{request_types::*, ApiRequestBuilder};
 use reqwest::Client;
 
 static TOP_ROW_ITEMS: &str = "/top_row_items.json";
