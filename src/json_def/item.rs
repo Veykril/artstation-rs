@@ -1,4 +1,4 @@
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct TopRowItem {
     pub image_url: String,
     pub title: String,

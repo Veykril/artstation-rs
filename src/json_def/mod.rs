@@ -14,6 +14,8 @@ mod item;
 pub use self::item::*;
 mod jobs;
 pub use self::jobs::*;
+mod shared;
+pub use self::shared::*;
 
 use serde::{Deserialize, Deserializer};
 
@@ -27,16 +29,9 @@ where
     Ok(opt.unwrap_or_default())
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct UnknownField;
 
-#[derive(Debug, Deserialize, Serialize)]
-pub struct Skill {
-    pub name: String,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct SoftwareItem {
-    pub name: String,
-    pub icon_url: String,
+impl_generic_json_response! {
+    Campaign, Follower, TopRowItem, Job, Like, Profile, Project, Submission
 }

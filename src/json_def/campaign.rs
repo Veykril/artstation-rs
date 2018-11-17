@@ -1,18 +1,18 @@
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Campaign {
-    campaign_asset: CampaignAsset,
-    id: i64,
+    pub campaign_asset: CampaignAsset,
+    pub id: i64,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct CampaignAsset {
-    width: i64,
-    height: i64,
-    image_url: String,
-    impression_tracking_tag: Option<String>,
-    asset_type: String,
-    asset_size: String,
-    id: i64,
-    url: String,
-    embed_html: Option<String>,
+    pub width: i64,
+    pub height: i64,
+    pub image_url: String,
+    pub impression_tracking_tag: Option<String>,
+    pub asset_type: String,
+    pub asset_size: String,
+    pub id: i64,
+    pub url: String,
+    pub embed_html: Option<String>,
 }

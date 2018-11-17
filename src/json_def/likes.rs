@@ -1,4 +1,6 @@
-#[derive(Debug, Deserialize, Serialize)]
+use json_def::shared::{Cover, Icons};
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Like {
     pub id: i64,
     pub user_id: i64,
@@ -21,24 +23,7 @@ pub struct Like {
     pub assets_count: i64,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
-pub struct Cover {
-    pub id: i64,
-    pub small_square_url: String,
-    pub micro_square_image_url: String,
-    pub thumb_url: String,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct Icons {
-    pub image: bool,
-    pub video: bool,
-    pub model3d: bool,
-    pub marmoset: bool,
-    pub pano: bool,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct User {
     pub id: i64,
     pub username: String,

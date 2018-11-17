@@ -1,8 +1,10 @@
 // todo figure out unknown fields and optional fields(nullable fields)
 
-use super::UnknownField;
+use json_def::shared::Skill;
+use json_def::shared::SoftwareItem;
+use json_def::UnknownField;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Profile {
     pub followed: bool,
     pub blocked: bool,
@@ -16,8 +18,8 @@ pub struct Profile {
     pub albums_with_community_projects: Vec<AlbumsWithCommunityProject>,
     pub profile_default_album: ProfileDefaultAlbum,
     pub social_profiles: Vec<SocialProfile>,
-    pub skills: Vec<super::Skill>,
-    pub software_items: Vec<super::SoftwareItem>,
+    pub skills: Vec<Skill>,
+    pub software_items: Vec<SoftwareItem>,
     pub experience_items: Vec<ExperienceItem>,
     pub user_productions: Vec<UnknownField>,
     pub portfolio: Portfolio,
@@ -73,7 +75,7 @@ pub struct Profile {
     pub public_email: Option<String>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct AlbumsWithCommunityProject {
     pub id: i64,
     pub title: String,
@@ -90,13 +92,13 @@ pub struct AlbumsWithCommunityProject {
     pub album_type: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ProfileDefaultAlbum {
     pub id: i64,
     pub album_type: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct SocialProfile {
     pub id: i64,
     pub url: String,
@@ -104,7 +106,7 @@ pub struct SocialProfile {
     pub position: i64,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ExperienceItem {
     pub company: Company,
     pub title: String,
@@ -117,13 +119,13 @@ pub struct ExperienceItem {
     pub finish_date_formatted: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Company {
     pub icon_url: String,
     pub name: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Portfolio {
     pub summary_as_html: String,
     pub resume_url: Option<String>,
@@ -132,15 +134,15 @@ pub struct Portfolio {
     pub demo_reel_url: Option<String>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct PortfolioDisplaySettings {
     pub profile_default_album_id: i64,
     pub website_default_album_id: i64,
     pub display_portfolio_as_albums: bool,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct PortfolioDisplaySettingsAlbums {
-    id: i64,
-    title: String,
+    pub id: i64,
+    pub title: String,
 }

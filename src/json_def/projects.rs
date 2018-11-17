@@ -1,21 +1,6 @@
-#[derive(Deserialize, Debug)]
-pub struct Cover {
-    pub id: i64,
-    pub small_square_url: String,
-    pub micro_square_image_url: String,
-    pub thumb_url: String,
-}
+use json_def::shared::{Cover, Icons};
 
-#[derive(Deserialize, Debug)]
-pub struct Icons {
-    pub image: bool,
-    pub video: bool,
-    pub model3d: bool,
-    pub marmoset: bool,
-    pub pano: bool,
-}
-
-#[derive(Deserialize, Debug)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Project {
     pub id: i64,
     pub user_id: i64,

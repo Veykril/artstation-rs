@@ -2,11 +2,12 @@
 name = "artstation"
 version = "0.0.1"
 authors = ["Lukas Wirth <lukastw97@gmail.com>"]
+repository = "https://github.com/Veykril/artstation-rs"
+readme = "README.md"
 
 [dependencies]
-reqwest = "0.9.4"
-http = "0.1"
-serde_derive = "1.0.80"
-serde = "1.0.80"
-regex = "1.0.5"
+reqwest = "~0.9"
+serde_derive = "~1.0"
+serde = "~1.0"
+regex = "~1.0"
 lazy_static = "1"

@@ -1,22 +1,27 @@
 extern crate reqwest;
 #[macro_use]
 extern crate serde_derive;
-extern crate http;
 extern crate regex;
 extern crate serde;
 #[macro_use]
 extern crate lazy_static;
 
-pub mod json_def;
 #[macro_use]
-mod request;
-pub use request::{ApiRequestBuilder, Size};
+mod macros;
+
 mod front_page_api;
-use front_page_api::FrontPageApi;
+pub mod json_def;
+mod request;
 mod users_api;
+
 use regex::Regex;
-use reqwest::RedirectPolicy;
-use reqwest::{header::COOKIE, Client, Result};
+use reqwest::{header::COOKIE, Client, RedirectPolicy, Result};
+
+use std::cell::RefCell;
+
+pub use request::{ApiRequestBuilder, Size};
+
+use front_page_api::FrontPageApi;
 use users_api::UserApi;
 
 static ARTSTATION_URL: &str = "https://www.artstation.com";
@@ -24,7 +29,7 @@ static SIGN_IN: &str = "/users/sign_in";
 
 pub struct ArtStation {
     client: Client,
-    token: Option<String>,
+    session: RefCell<Option<String>>,
 }
 
 impl ArtStation {
@@ -32,29 +37,19 @@ impl ArtStation {
     pub fn new() -> Result<Self> {
         Ok(ArtStation {
             client: Client::builder().redirect(RedirectPolicy::none()).build()?,
-            token: None,
+            session: RefCell::new(None),
         })
     }
 
-    pub fn login(&mut self, email: &str, password: &str) -> Result<reqwest::Response> {
+    pub fn login(&self, email: &str, password: &str) -> Result<reqwest::Response> {
         lazy_static! {
             static ref TOKEN_REGEX: Regex =
                 Regex::new(r#"name="authenticity_token" value="(.*?)""#).unwrap();
         }
 
-        let mut login_prep_response = self
-            .client
-            .get(&[ARTSTATION_URL, SIGN_IN].concat())
-            .send()?;
+        let mut login_prep_response =
+            self.send_request(self.client.get(&[ARTSTATION_URL, SIGN_IN].concat()))?;
         let html = login_prep_response.text().unwrap();
-
-        let login_prep_headers = login_prep_response.headers();
-        let artstation_session = login_prep_headers
-            .get_all("set-cookie")
-            .iter()
-            .filter_map(|x| x.to_str().ok())
-            .find(|x| x.starts_with("_ArtStation_session="))
-            .expect("`_ArtStation_session=` cookie not found, this is a bug");
 
         let mut params = std::collections::HashMap::with_capacity(7);
         params.insert("utf8", "✓");
@@ -73,27 +68,38 @@ impl ArtStation {
         params.insert("user[remember_me]", "true");
         params.insert("button", "");
 
-        let mut login_response = self
-            .client
-            .post(&[ARTSTATION_URL, SIGN_IN].concat())
-            .form(&params)
-            .header(COOKIE, artstation_session)
-            .send()?;
-        Ok(login_response)
+        self.send_request(
+            self.client
+                .post(&[ARTSTATION_URL, SIGN_IN].concat())
+                .form(&params),
+        )
     }
-
-    //#[inline]
-    //pub fn from_client(client: Client) -> Self {
-    //    ArtStation { client, token: None }
-    //}
 
     #[inline]
     pub fn user<'a, 'b>(&'a self, name: &'b str) -> UserApi<'a, 'b> {
-        UserApi::new(&self.client, name)
+        UserApi::new(self, name)
     }
 
     #[inline]
     pub fn front_page(&self) -> FrontPageApi {
-        FrontPageApi::new(&self.client)
+        FrontPageApi::new(self)
+    }
+
+    pub fn send_request(&self, mut builder: reqwest::RequestBuilder) -> Result<reqwest::Response> {
+        if let Some(session) = self.session.borrow().clone() {
+            builder = builder.header(COOKIE, session);
+        }
+        let response = builder.send()?;
+        if let Some(new_session) = response
+            .headers()
+            .get_all("set-cookie")
+            .iter()
+            .find(|x| x.as_bytes().starts_with(b"_ArtStation_session="))
+            .map(|v| v.to_str().ok().map(ToOwned::to_owned))
+            .unwrap_or_default()
+        {
+            self.session.replace(Some(new_session));
+        }
+        Ok(response)
     }
 }

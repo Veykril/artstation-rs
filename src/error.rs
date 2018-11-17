@@ -1,4 +1,5 @@
 use reqwest;
+
 use std::{error::Error as StdError, fmt};
 
 pub type Result<T> = ::std::result::Result<T, Error>;

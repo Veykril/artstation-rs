@@ -1,4 +1,7 @@
-#[derive(Debug, Deserialize, Serialize)]
+use json_def::shared::Skill;
+use json_def::shared::SoftwareItem;
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Follower {
     pub id: i64,
     pub username: String,
@@ -20,6 +23,6 @@ pub struct Follower {
     pub large_avatar_url: String,
     pub is_staff: bool,
     pub sample_projects: Vec<String>,
-    pub skills: Vec<super::Skill>,
-    pub software_items: Vec<super::SoftwareItem>,
+    pub skills: Vec<Skill>,
+    pub software_items: Vec<SoftwareItem>,
 }
