@@ -1,7 +1,7 @@
 use json_def::shared::Skill;
 use json_def::shared::SoftwareItem;
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Follower {
     pub id: i64,
     pub username: String,

@@ -1,6 +1,6 @@
 use json_def::shared::{Cover, Icons};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Project {
     pub id: i64,
     pub user_id: i64,

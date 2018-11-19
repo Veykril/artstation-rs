@@ -1,4 +1,4 @@
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Icons {
     pub image: bool,
     pub video: bool,
@@ -7,7 +7,7 @@ pub struct Icons {
     pub pano: bool,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Cover {
     pub id: i64,
     pub small_square_url: String,
@@ -15,12 +15,12 @@ pub struct Cover {
     pub thumb_url: String,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Skill {
     pub name: String,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct SoftwareItem {
     pub name: String,
     pub icon_url: String,

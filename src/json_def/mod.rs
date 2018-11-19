@@ -16,7 +16,11 @@ mod jobs;
 pub use self::jobs::*;
 mod shared;
 pub use self::shared::*;
+pub mod v2;
 
+use request::ArtStationResponse;
+use reqwest::Result;
+use serde::de::DeserializeOwned;
 use serde::{Deserialize, Deserializer};
 
 #[allow(dead_code)]
@@ -31,6 +35,21 @@ where
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct UnknownField;
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct DataWrap<T: Sized> {
+    data: T,
+}
+
+impl<T> ArtStationResponse for DataWrap<T>
+where
+    T: ArtStationResponse + DeserializeOwned,
+{
+    type Output = T;
+    fn from_reqwest_response(mut response: reqwest::Response) -> Result<Self::Output> {
+        Ok(response.json::<Self>()?.data)
+    }
+}
 
 impl_generic_json_response! {
     Campaign, Follower, TopRowItem, Job, Like, Profile, Project, Submission

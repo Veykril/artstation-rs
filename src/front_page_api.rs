@@ -1,12 +1,11 @@
 use request::{request_types::*, ApiRequestBuilder};
 
 use ArtStation;
-use ARTSTATION_URL;
 
-static TOP_ROW_ITEMS: &str = "/top_row_items.json";
-static CAMPAIGN: &str = "/c.json";
-static PROJECTS: &str = "/projects.json";
-static JOBS: &str = "/jobs.json";
+static TOP_ROW_ITEMS: &str = "/top_row_items";
+static CAMPAIGN: &str = "/c";
+static PROJECTS: &str = "/projects";
+static JOBS: &str = "/jobs";
 
 pub struct FrontPageApi<'a> {
     art_client: &'a ArtStation,
@@ -18,19 +17,24 @@ impl<'a> FrontPageApi<'a> {
         FrontPageApi { art_client }
     }
 
-    pub fn top_row_items(&self) -> ApiRequestBuilder<TopRowItemsRequest> {
-        ApiRequestBuilder::get(self.art_client, &[ARTSTATION_URL, TOP_ROW_ITEMS].concat())
+    #[inline]
+    fn craft_url(&self, endpoint: &str) -> String {
+        [ArtStation::URL, endpoint, ".json"].concat()
     }
-    // has takeover query w/e that does
+
+    pub fn top_row_items(&self) -> ApiRequestBuilder<TopRowItemsRequest> {
+        ApiRequestBuilder::get(self.art_client, &self.craft_url(TOP_ROW_ITEMS))
+    }
+    
     pub fn campaign_info(&self) -> ApiRequestBuilder<CampaignInfoRequest> {
-        ApiRequestBuilder::get(self.art_client, &[ARTSTATION_URL, CAMPAIGN].concat())
+        ApiRequestBuilder::get(self.art_client, &self.craft_url(CAMPAIGN))
     }
 
     pub fn projects(&self) -> ApiRequestBuilder<ProjectsRequest> {
-        ApiRequestBuilder::get(self.art_client, &[ARTSTATION_URL, PROJECTS].concat())
+        ApiRequestBuilder::get(self.art_client, &self.craft_url(PROJECTS))
     }
 
     pub fn jobs(&self) -> ApiRequestBuilder<JobsRequest> {
-        ApiRequestBuilder::get(self.art_client, &[ARTSTATION_URL, JOBS].concat())
+        ApiRequestBuilder::get(self.art_client, &self.craft_url(JOBS))
     }
 }

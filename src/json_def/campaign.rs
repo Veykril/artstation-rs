@@ -1,10 +1,10 @@
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Campaign {
     pub campaign_asset: CampaignAsset,
     pub id: i64,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct CampaignAsset {
     pub width: i64,
     pub height: i64,

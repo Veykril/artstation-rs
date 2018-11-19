@@ -9,22 +9,23 @@ extern crate lazy_static;
 #[macro_use]
 mod macros;
 
-mod front_page_api;
 pub mod json_def;
+
+mod front_page_api;
 mod request;
 mod users_api;
+mod v2;
 
 use regex::Regex;
 use reqwest::{header::COOKIE, Client, RedirectPolicy, Result};
 
 use std::cell::RefCell;
 
-pub use request::{ApiRequestBuilder, Size};
+pub use front_page_api::FrontPageApi;
+pub use request::{request_types, ApiRequestBuilder, query};
+pub use users_api::UserApi;
+pub use v2::V2;
 
-use front_page_api::FrontPageApi;
-use users_api::UserApi;
-
-static ARTSTATION_URL: &str = "https://www.artstation.com";
 static SIGN_IN: &str = "/users/sign_in";
 
 pub struct ArtStation {
@@ -33,6 +34,7 @@ pub struct ArtStation {
 }
 
 impl ArtStation {
+    const URL: &'static str = "https://www.artstation.com";
     #[inline]
     pub fn new() -> Result<Self> {
         Ok(ArtStation {
@@ -48,7 +50,7 @@ impl ArtStation {
         }
 
         let mut login_prep_response =
-            self.send_request(self.client.get(&[ARTSTATION_URL, SIGN_IN].concat()))?;
+            self.send_request(self.client.get(&[Self::URL, SIGN_IN].concat()))?;
         let html = login_prep_response.text().unwrap();
 
         let mut params = std::collections::HashMap::with_capacity(7);
@@ -70,9 +72,14 @@ impl ArtStation {
 
         self.send_request(
             self.client
-                .post(&[ARTSTATION_URL, SIGN_IN].concat())
+                .post(&[Self::URL, SIGN_IN].concat())
                 .form(&params),
         )
+    }
+
+    #[inline]
+    pub fn v2(&self) -> V2 {
+        V2::new(self)
     }
 
     #[inline]

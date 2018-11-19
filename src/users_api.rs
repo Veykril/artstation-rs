@@ -1,9 +1,7 @@
 use request::{request_types::*, ApiRequestBuilder};
 
 use ArtStation;
-use ARTSTATION_URL;
 
-static USERS_API: &str = "/users/";
 static PROJECTS: &str = "/projects.json";
 static FOLLOWERS: &str = "/followers.json";
 static FOLLOWINGS: &str = "/followings.json";
@@ -17,13 +15,22 @@ pub struct UserApi<'a, 'b> {
 }
 
 impl<'a, 'b> UserApi<'a, 'b> {
+    const USERS_API: &'static str = "/users/";
+    #[inline]
     pub(crate) fn new(art_client: &'a ArtStation, name: &'b str) -> Self {
         UserApi { art_client, name }
     }
 
     #[inline]
     fn craft_url(&self, endpoint: &str) -> String {
-        [ARTSTATION_URL, USERS_API, self.name, endpoint].concat()
+        [
+            ArtStation::URL,
+            Self::USERS_API,
+            self.name,
+            endpoint,
+            ".json",
+        ]
+        .concat()
     }
 
     pub fn profile(&self) -> ApiRequestBuilder<ProfileRequest> {

@@ -1,4 +1,4 @@
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Job {
     pub id: i64,
     pub hash_id: String,
