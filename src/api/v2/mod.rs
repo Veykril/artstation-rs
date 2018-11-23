@@ -1,8 +1,11 @@
+mod cart;
 mod messaging;
 mod notifications;
 
+pub use self::cart::Cart;
+pub use self::notifications::Notifications;
+
 use self::messaging::Messaging;
-use self::notifications::Notifications;
 use crate::ArtStation;
 
 pub struct V2<'a> {
@@ -17,6 +20,10 @@ impl<'a> V2<'a> {
         V2 { art_client }
     }
 
+    pub fn cart(&self) -> Cart {
+        Cart::new(self.art_client)
+    }
+
     pub fn notifications(&self) -> Notifications {
         Notifications::new(self.art_client)
     }
@@ -27,9 +34,8 @@ impl<'a> V2<'a> {
 }
 
 use crate::json_def::v2::UnreadCount;
-use crate::request::query::IncludeMarketPlaceQuery;
-use crate::request::ArtStationRequest;
+use crate::request::query::IncludeMarketplaceQuery;
 
 make_request! {
-    UnreadCountRequest = UnreadCount with IncludeMarketPlaceQuery;
+    UnreadCountRequest = UnreadCount with IncludeMarketplaceQuery;
 }

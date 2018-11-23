@@ -1,3 +1,4 @@
+use crate::api::ArtStationApi;
 use crate::request::{request_types::*, ApiRequestBuilder};
 use crate::ArtStation;
 
@@ -14,22 +15,9 @@ pub struct UserApi<'a, 'b> {
 }
 
 impl<'a, 'b> UserApi<'a, 'b> {
-    const USERS_API: &'static str = "/users/";
     #[inline]
     pub(crate) fn new(art_client: &'a ArtStation, name: &'b str) -> Self {
         UserApi { art_client, name }
-    }
-
-    #[inline]
-    fn craft_url(&self, endpoint: &str) -> String {
-        [
-            ArtStation::URL,
-            Self::USERS_API,
-            self.name,
-            endpoint,
-            ".json",
-        ]
-        .concat()
     }
 
     pub fn profile(&self) -> ApiRequestBuilder<ProfileRequest> {
@@ -54,5 +42,11 @@ impl<'a, 'b> UserApi<'a, 'b> {
 
     pub fn submissions(&self) -> ApiRequestBuilder<SubmissionsRequest> {
         ApiRequestBuilder::get(self.art_client, &self.craft_url(SUBMISSIONS))
+    }
+}
+
+impl<'a, 'b> ArtStationApi for UserApi<'a, 'b> {
+    fn craft_url(&self, endpoint: &str) -> String {
+        [ArtStation::URL, "/users/", self.name, endpoint, ".json"].concat()
     }
 }

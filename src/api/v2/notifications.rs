@@ -1,4 +1,5 @@
 use crate::api::v2::{UnreadCountRequest, V2};
+use crate::api::ArtStationApi;
 use crate::ApiRequestBuilder;
 use crate::ArtStation;
 
@@ -7,26 +8,25 @@ pub struct Notifications<'a> {
 }
 
 impl<'a> Notifications<'a> {
-    const API_NOTIFICATIONS: &'static str = "notifications/";
-
-    #[inline]
-    pub(crate) fn make_url(&self, endpoint: &str) -> String {
-        [
-            ArtStation::URL,
-            V2::API_BASE,
-            Self::API_NOTIFICATIONS,
-            endpoint,
-            ".json",
-        ]
-        .concat()
-    }
-
     #[inline]
     pub(crate) fn new(art_client: &'a ArtStation) -> Self {
         Notifications { art_client }
     }
 
     pub fn unread_count(&self) -> ApiRequestBuilder<UnreadCountRequest> {
-        ApiRequestBuilder::get(self.art_client, &self.make_url("unread_count"))
+        ApiRequestBuilder::get(self.art_client, &self.craft_url("unread_count"))
+    }
+}
+
+impl<'a> ArtStationApi for Notifications<'a> {
+    fn craft_url(&self, endpoint: &str) -> String {
+        [
+            ArtStation::URL,
+            V2::API_BASE,
+            "notifications/",
+            endpoint,
+            ".json",
+        ]
+        .concat()
     }
 }

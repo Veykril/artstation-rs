@@ -11,7 +11,7 @@ mod macros;
 
 pub mod json_def;
 
-mod api;
+pub mod api;
 mod request;
 
 use regex::Regex;
@@ -19,8 +19,8 @@ use reqwest::{header::COOKIE, Client, RedirectPolicy, Result};
 
 use std::cell::RefCell;
 
-pub use crate::api::v2::V2;
-pub use crate::api::{front_page_api::FrontPageApi, users_api::UserApi};
+use crate::api::{v2::V2, FrontPageApi, UserApi};
+
 pub use crate::request::{query, request_types, ApiRequestBuilder};
 
 static SIGN_IN: &str = "/users/sign_in";

@@ -2,14 +2,14 @@ macro_rules! make_request {
     () => {};
     ($name:ident = $response:ident; $($tail:tt)*) => {
         pub struct $name;
-        impl ArtStationRequest for $name {
+        impl crate::request::ArtStationRequest for $name {
             type Response = $response;
         }
         make_request!($($tail)*);
     };
     ($name:ident = $response:ident<$inner:ident>; $($tail:tt)*) => {
         pub struct $name;
-        impl ArtStationRequest for $name {
+        impl crate::request::ArtStationRequest for $name {
             type Response = $response<$inner>;
         }
         make_request!($($tail)*);

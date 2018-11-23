@@ -1,16 +1,33 @@
-use crate::request::ArtStationRequest;
-use crate::request::ArtStationResponse;
-use crate::request::JsonPagedResponse;
-use crate::ApiRequestBuilder;
+use super::response::ArtStationResponse;
+use super::response::JsonPagedResponse;
+use super::ApiRequestBuilder;
+use super::ArtStationRequest;
 use serde::de::DeserializeOwned;
 
-pub trait LimitQuery: ArtStationRequest {}
-pub trait PageQuery: ArtStationRequest {}
-pub trait TakeOverQuery: ArtStationRequest {}
-pub trait SizeQuery: ArtStationRequest {}
-pub trait FeaturedQuery: ArtStationRequest {}
-pub trait AlbumIdQuery: ArtStationRequest {}
-pub trait IncludeMarketPlaceQuery: ArtStationRequest {}
+macro_rules! define_query {
+    ($($name:ident $raw_name:ident: $ty:ty);*;) => {
+        $(
+            pub trait $name: super::ArtStationRequest {}
+
+            impl<'a, R: $name> super::ApiRequestBuilder<'a, R> {
+                pub fn $raw_name(mut self, $raw_name: $ty) -> Self {
+                    self.request_builder = self.request_builder.query(&[(stringify!($raw_name), $raw_name)]);
+                    self
+                }
+            }
+        )*
+    };
+}
+
+define_query! {
+    LimitQuery limit: u32;
+    PageQuery page: u32;
+    TakeOverQuery take_over: u32;
+    SizeQuery size: Size;
+    FeaturedQuery featured: bool;
+    AlbumIdQuery album_id: u32;
+    IncludeMarketplaceQuery include_marketplace: bool;
+}
 
 #[derive(Serialize)]
 #[serde = "untagged"]
@@ -18,57 +35,6 @@ pub trait IncludeMarketPlaceQuery: ArtStationRequest {}
 pub enum Size {
     Small,
     Large,
-}
-
-impl<'a, R: LimitQuery> ApiRequestBuilder<'a, R> {
-    pub fn limit(mut self, limit: u32) -> Self {
-        self.request_builder = self.request_builder.query(&[("limit", limit)]);
-        self
-    }
-}
-
-impl<'a, R: PageQuery> ApiRequestBuilder<'a, R> {
-    pub fn page(mut self, page: u32) -> Self {
-        self.request_builder = self.request_builder.query(&[("page", page)]);
-        self
-    }
-}
-
-impl<'a, R: TakeOverQuery> ApiRequestBuilder<'a, R> {
-    pub fn takeover(mut self, takeover: u32) -> Self {
-        self.request_builder = self.request_builder.query(&[("takeover", takeover)]);
-        self
-    }
-}
-
-impl<'a, R: SizeQuery> ApiRequestBuilder<'a, R> {
-    pub fn size(mut self, size: Size) -> Self {
-        self.request_builder = self.request_builder.query(&[("size", size)]);
-        self
-    }
-}
-
-impl<'a, R: FeaturedQuery> ApiRequestBuilder<'a, R> {
-    pub fn featured(mut self, featured: bool) -> Self {
-        self.request_builder = self.request_builder.query(&[("featured", featured)]);
-        self
-    }
-}
-
-impl<'a, R: AlbumIdQuery> ApiRequestBuilder<'a, R> {
-    pub fn album_id(mut self, id: u32) -> Self {
-        self.request_builder = self.request_builder.query(&[("album_id", id)]);
-        self
-    }
-}
-
-impl<'a, R: IncludeMarketPlaceQuery> ApiRequestBuilder<'a, R> {
-    pub fn include_marketplace(mut self, include: bool) -> Self {
-        self.request_builder = self
-            .request_builder
-            .query(&[("include_marketplace", include)]);
-        self
-    }
 }
 
 impl<S, T> PageQuery for S
