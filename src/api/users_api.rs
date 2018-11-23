@@ -1,6 +1,5 @@
-use request::{request_types::*, ApiRequestBuilder};
-
-use ArtStation;
+use crate::request::{request_types::*, ApiRequestBuilder};
+use crate::ArtStation;
 
 static PROJECTS: &str = "/projects.json";
 static FOLLOWERS: &str = "/followers.json";

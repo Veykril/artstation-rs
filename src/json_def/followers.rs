@@ -1,5 +1,5 @@
-use json_def::shared::Skill;
-use json_def::shared::SoftwareItem;
+use super::shared::Skill;
+use super::shared::SoftwareItem;
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Follower {

@@ -1,5 +1,6 @@
-use request::ArtStationResponse;
 use reqwest::Result;
+
+use crate::request::response::ArtStationResponse;
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct UnreadCount {

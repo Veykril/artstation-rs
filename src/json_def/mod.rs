@@ -18,7 +18,7 @@ mod shared;
 pub use self::shared::*;
 pub mod v2;
 
-use request::ArtStationResponse;
+use crate::request::response::ArtStationResponse;
 use reqwest::Result;
 use serde::de::DeserializeOwned;
 use serde::{Deserialize, Deserializer};

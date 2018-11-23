@@ -1,9 +1,9 @@
-mod notifications;
 mod messaging;
+mod notifications;
 
-use self::notifications::Notifications;
 use self::messaging::Messaging;
-use ArtStation;
+use self::notifications::Notifications;
+use crate::ArtStation;
 
 pub struct V2<'a> {
     art_client: &'a ArtStation,
@@ -26,9 +26,9 @@ impl<'a> V2<'a> {
     }
 }
 
-use json_def::{v2::UnreadCount};
-use request::ArtStationRequest;
-use request::query::IncludeMarketPlaceQuery;
+use crate::json_def::v2::UnreadCount;
+use crate::request::query::IncludeMarketPlaceQuery;
+use crate::request::ArtStationRequest;
 
 make_request! {
     UnreadCountRequest = UnreadCount with IncludeMarketPlaceQuery;

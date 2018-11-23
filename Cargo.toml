@@ -4,6 +4,7 @@ version = "0.0.1"
 authors = ["Lukas Wirth <lukastw97@gmail.com>"]
 repository = "https://github.com/Veykril/artstation-rs"
 readme = "README.md"
+edition = "2018"
 
 [dependencies]
 reqwest = "~0.9"

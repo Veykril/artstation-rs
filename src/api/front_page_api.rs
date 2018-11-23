@@ -1,6 +1,5 @@
-use request::{request_types::*, ApiRequestBuilder};
-
-use ArtStation;
+use crate::request::{request_types::*, ApiRequestBuilder};
+use crate::ArtStation;
 
 static TOP_ROW_ITEMS: &str = "/top_row_items";
 static CAMPAIGN: &str = "/c";
@@ -25,7 +24,7 @@ impl<'a> FrontPageApi<'a> {
     pub fn top_row_items(&self) -> ApiRequestBuilder<TopRowItemsRequest> {
         ApiRequestBuilder::get(self.art_client, &self.craft_url(TOP_ROW_ITEMS))
     }
-    
+
     pub fn campaign_info(&self) -> ApiRequestBuilder<CampaignInfoRequest> {
         ApiRequestBuilder::get(self.art_client, &self.craft_url(CAMPAIGN))
     }

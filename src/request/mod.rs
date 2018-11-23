@@ -1,46 +1,16 @@
 pub mod query;
+pub mod response;
 
 use reqwest::{IntoUrl, Method, RequestBuilder, Result};
 use serde::de::DeserializeOwned;
 
 use std::marker::PhantomData;
 
-use ArtStation;
+use crate::request::response::{ArtStationResponse, JsonPagedResponse};
+use crate::ArtStation;
 
 pub trait ArtStationRequest {
     type Response: ArtStationResponse;
-}
-
-pub trait ArtStationResponse: Sized {
-    type Output: Sized;
-    fn from_reqwest_response(response: reqwest::Response) -> ::reqwest::Result<Self::Output>;
-}
-
-impl<T> ArtStationResponse for Vec<T>
-    where
-        T: ArtStationResponse + DeserializeOwned,
-{
-    type Output = Self;
-    fn from_reqwest_response(mut response: reqwest::Response) -> Result<Self::Output> {
-        Ok(response.json()?)
-    }
-}
-
-impl<T> ArtStationResponse for JsonPagedResponse<T>
-    where
-        T: ArtStationResponse + DeserializeOwned,
-{
-    type Output = Vec<T>;
-    fn from_reqwest_response(mut response: reqwest::Response) -> Result<Self::Output> {
-        Ok(response.json::<Self>()?.data)
-    }
-}
-
-#[derive(Debug, Deserialize)]
-#[serde(bound = "R: DeserializeOwned")]
-pub struct JsonPagedResponse<R: DeserializeOwned> {
-    pub total_count: usize,
-    pub data: Vec<R>,
 }
 
 pub struct ApiRequestBuilder<'a, R> {
@@ -79,14 +49,14 @@ impl<'a, R: ArtStationRequest> ApiRequestBuilder<'a, R> {
     }
 
     pub fn send(self) -> Result<<R::Response as ArtStationResponse>::Output> {
-        R::Response::from_reqwest_response(self.art_client.send_request(self.request_builder)?)
+        R::Response::from_reqwest_response(self.send_raw()?.error_for_status()?)
     }
 }
 
 impl<'a, T, R> ApiRequestBuilder<'a, R>
-    where
-        T: ArtStationResponse + DeserializeOwned,
-        R: ArtStationRequest<Response = JsonPagedResponse<T>>,
+where
+    T: ArtStationResponse + DeserializeOwned,
+    R: ArtStationRequest<Response = JsonPagedResponse<T>>,
 {
     pub fn send_all(self) -> Result<Vec<T>> {
         let request = self.request_builder.build()?;
@@ -98,9 +68,9 @@ impl<'a, T, R> ApiRequestBuilder<'a, R>
                 request.method().clone(),
                 request.url().clone(),
             )
-                .page(page)
-                .send_raw()?
-                .json::<R::Response>()?;
+            .page(page)
+            .send_raw()?
+            .json::<R::Response>()?;
 
             if response_buf.capacity() == 0 {
                 response_buf.reserve_exact(response.total_count);
@@ -115,8 +85,8 @@ impl<'a, T, R> ApiRequestBuilder<'a, R>
 }
 
 pub mod request_types {
-    use super::{*, query::*};
-    use json_def::*;
+    use super::{query::*, *};
+    use crate::json_def::*;
     make_request! {
         ProjectsRequest = JsonPagedResponse<Project> with AlbumIdQuery;
         ProfileRequest = Profile;

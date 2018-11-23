@@ -1,7 +1,7 @@
 mod conversations;
 
 use self::conversations::Conversations;
-use ArtStation;
+use crate::ArtStation;
 
 pub struct Messaging<'a> {
     art_client: &'a ArtStation,

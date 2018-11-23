@@ -1,8 +1,8 @@
-use request::ArtStationRequest;
-use request::ArtStationResponse;
+use crate::request::ArtStationRequest;
+use crate::request::ArtStationResponse;
+use crate::request::JsonPagedResponse;
+use crate::ApiRequestBuilder;
 use serde::de::DeserializeOwned;
-use request::JsonPagedResponse;
-use ApiRequestBuilder;
 
 pub trait LimitQuery: ArtStationRequest {}
 pub trait PageQuery: ArtStationRequest {}
@@ -72,8 +72,8 @@ impl<'a, R: IncludeMarketPlaceQuery> ApiRequestBuilder<'a, R> {
 }
 
 impl<S, T> PageQuery for S
-    where
-        T: ArtStationResponse + DeserializeOwned,
-        S: ArtStationRequest<Response = JsonPagedResponse<T>>,
+where
+    T: ArtStationResponse + DeserializeOwned,
+    S: ArtStationRequest<Response = JsonPagedResponse<T>>,
 {
 }

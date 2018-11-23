@@ -1,8 +1,8 @@
 // todo figure out unknown fields and optional fields(nullable fields)
 
-use json_def::shared::Skill;
-use json_def::shared::SoftwareItem;
-use json_def::UnknownField;
+use super::shared::Skill;
+use super::shared::SoftwareItem;
+use super::UnknownField;
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Profile {

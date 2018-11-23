@@ -1,4 +1,4 @@
-use json_def::shared::{Cover, Icons};
+use super::shared::{Cover, Icons};
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Like {
