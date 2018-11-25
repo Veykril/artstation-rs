@@ -1,5 +1,7 @@
-use crate::api::v2::{messaging::Messaging, UnreadCountRequest, V2};
-use crate::api::ArtStationApi;
+use crate::api::{
+    v2::{messaging::Messaging, UnreadCountRequest, V2},
+    ArtStationApi,
+};
 use crate::ApiRequestBuilder;
 use crate::ArtStation;
 

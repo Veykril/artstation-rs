@@ -18,10 +18,11 @@ mod shared;
 pub use self::shared::*;
 pub mod v2;
 
-use crate::request::response::ArtStationResponse;
 use reqwest::Result;
 use serde::de::DeserializeOwned;
 use serde::{Deserialize, Deserializer};
+
+use crate::request::response::ArtStationResponse;
 
 #[allow(dead_code)]
 pub(crate) fn nullable_priority<'de, D, T>(deserializer: D) -> std::result::Result<T, D::Error>

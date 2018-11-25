@@ -2,13 +2,6 @@ use crate::api::ArtStationApi;
 use crate::request::{request_types::*, ApiRequestBuilder};
 use crate::ArtStation;
 
-static PROJECTS: &str = "/projects.json";
-static FOLLOWERS: &str = "/followers.json";
-static FOLLOWINGS: &str = "/followings.json";
-static LIKES: &str = "/likes.json";
-static SUBMISSIONS: &str = "/likes.json";
-static PROFILE: &str = ".json";
-
 /// This struct offers builder methods for anything related to user profiles. You get an instance by
 /// calling the [`user`] method of the ArtStation struct. The client does not have to be logged in
 /// for any of these requests.
@@ -26,27 +19,27 @@ impl<'a, 'b> UsersApi<'a, 'b> {
     }
 
     pub fn profile(&self) -> ApiRequestBuilder<ProfileRequest> {
-        ApiRequestBuilder::get(self.art_client, &self.craft_url(PROFILE))
+        ApiRequestBuilder::get(self.art_client, &self.craft_url(""))
     }
 
     pub fn projects(&self) -> ApiRequestBuilder<ProjectsRequest> {
-        ApiRequestBuilder::get(self.art_client, &self.craft_url(PROJECTS))
+        ApiRequestBuilder::get(self.art_client, &self.craft_url("/projects"))
     }
 
     pub fn likes(&self) -> ApiRequestBuilder<LikesRequest> {
-        ApiRequestBuilder::get(self.art_client, &self.craft_url(LIKES))
+        ApiRequestBuilder::get(self.art_client, &self.craft_url("/likes"))
     }
 
     pub fn followers(&self) -> ApiRequestBuilder<FollowersRequest> {
-        ApiRequestBuilder::get(self.art_client, &self.craft_url(FOLLOWERS))
+        ApiRequestBuilder::get(self.art_client, &self.craft_url("/followers"))
     }
 
     pub fn followings(&self) -> ApiRequestBuilder<FollowingsRequest> {
-        ApiRequestBuilder::get(self.art_client, &self.craft_url(FOLLOWINGS))
+        ApiRequestBuilder::get(self.art_client, &self.craft_url("/followings"))
     }
 
     pub fn submissions(&self) -> ApiRequestBuilder<SubmissionsRequest> {
-        ApiRequestBuilder::get(self.art_client, &self.craft_url(SUBMISSIONS))
+        ApiRequestBuilder::get(self.art_client, &self.craft_url("/submissions"))
     }
 }
 
