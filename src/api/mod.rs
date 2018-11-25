@@ -1,6 +1,7 @@
 mod front_page_api;
 mod users_api;
 
+pub mod request_types;
 pub mod v2;
 
 pub use self::front_page_api::FrontPageApi;

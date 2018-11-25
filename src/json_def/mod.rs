@@ -1,3 +1,5 @@
+//! This module defines all of the possible json responses as structs
+
 mod projects;
 pub use self::projects::*;
 mod profile;

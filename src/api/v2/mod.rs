@@ -1,4 +1,5 @@
 pub mod messaging;
+pub mod request_types;
 
 mod cart;
 mod notifications;
@@ -36,15 +37,5 @@ impl<'a> V2<'a> {
 
     pub fn messaging(&self) -> Messaging {
         Messaging::new(self.art_client)
-    }
-}
-
-pub(crate) use self::private::UnreadCountRequest;
-mod private {
-    use crate::json_def::v2::UnreadCount;
-    use crate::request::query::IncludeMarketplaceQuery;
-
-    make_request! {
-        UnreadCountRequest = UnreadCount with IncludeMarketplaceQuery;
     }
 }

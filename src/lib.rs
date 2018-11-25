@@ -45,7 +45,7 @@ pub mod api;
 pub mod json_def;
 
 mod request;
-pub use crate::request::{query, request_types, ApiRequestBuilder, ArtStationRequest};
+pub use crate::request::{query, ApiRequestBuilder, ArtStationRequest};
 
 use regex::Regex;
 use reqwest::{header::COOKIE, Client, RedirectPolicy, Result};

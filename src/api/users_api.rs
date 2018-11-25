@@ -1,6 +1,5 @@
-use crate::api::ArtStationApi;
-use crate::request::{request_types::*, ApiRequestBuilder};
-use crate::ArtStation;
+use super::request_types::*;
+use crate::{api::ArtStationApi, request::ApiRequestBuilder, ArtStation};
 
 /// This struct offers builder methods for anything related to user profiles. You get an instance by
 /// calling the [`user`] method of the ArtStation struct. The client does not have to be logged in

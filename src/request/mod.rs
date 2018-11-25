@@ -6,8 +6,10 @@ use serde::de::DeserializeOwned;
 
 use std::marker::PhantomData;
 
-use crate::request::response::{ArtStationResponse, JsonPagedResponse};
-use crate::ArtStation;
+use crate::{
+    request::response::{ArtStationResponse, JsonPagedResponse},
+    ArtStation,
+};
 
 /// An `ArtStationRequest` is used by the [`ApiRequestBuilder`] for it's generic type.
 pub trait ArtStationRequest {
@@ -96,21 +98,5 @@ where
             }
             page += 1;
         }
-    }
-}
-
-pub mod request_types {
-    use super::{query::*, *};
-    use crate::json_def::*;
-    make_request! {
-        ProjectsRequest = JsonPagedResponse<Project> with AlbumIdQuery;
-        ProfileRequest = Profile;
-        FollowersRequest = JsonPagedResponse<Follower>;
-        FollowingsRequest = JsonPagedResponse<Follower>;
-        SubmissionsRequest = JsonPagedResponse<Submission>;
-        LikesRequest = JsonPagedResponse<Like>;
-        TopRowItemsRequest = Vec<TopRowItem> with LimitQuery;
-        CampaignInfoRequest = Campaign with SizeQuery, TakeOverQuery;
-        JobsRequest = Vec<Job> with FeaturedQuery, LimitQuery;
     }
 }

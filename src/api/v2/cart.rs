@@ -1,6 +1,10 @@
-use crate::api::ArtStationApi;
-use crate::ApiRequestBuilder;
-use crate::ArtStation;
+use crate::{
+    api::{
+        v2::{request_types::CountRequest, V2},
+        ArtStationApi,
+    },
+    ApiRequestBuilder, ArtStation,
+};
 
 /// This struct reflects the shopping cart endpoint. You get an instance by calling the [`cart`]
 /// method of the [`V2`] struct.
@@ -25,11 +29,4 @@ impl<'a> ArtStationApi for Cart<'a> {
     fn craft_url(&self, endpoint: &str) -> String {
         [ArtStation::URL, V2::API_BASE, "cart/", endpoint, ".json"].concat()
     }
-}
-
-use crate::api::v2::V2;
-use crate::json_def::v2::Count;
-
-make_request! {
-    CountRequest = Count;
 }

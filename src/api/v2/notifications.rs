@@ -1,7 +1,10 @@
-use crate::api::v2::{UnreadCountRequest, V2};
-use crate::api::ArtStationApi;
-use crate::ApiRequestBuilder;
-use crate::ArtStation;
+use crate::{
+    api::{
+        v2::{request_types::UnreadCountRequest, V2},
+        ArtStationApi,
+    },
+    ApiRequestBuilder, ArtStation,
+};
 
 /// This struct reflects the notifications endpoint. You get an instance by calling the [`notifications`]
 /// method of the [`V2`] struct.

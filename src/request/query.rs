@@ -1,8 +1,9 @@
 use serde::de::DeserializeOwned;
 
-use super::response::ArtStationResponse;
-use super::response::JsonPagedResponse;
-use super::ArtStationRequest;
+use super::{
+    response::{ArtStationResponse, JsonPagedResponse},
+    ArtStationRequest,
+};
 
 macro_rules! define_query {
     ($($name:ident $raw_name:ident: $ty:ty);*;) => {
