@@ -3,6 +3,11 @@ mod conversations;
 use self::conversations::Conversations;
 use crate::ArtStation;
 
+/// This struct offers access to the v2 messaging endpoints. You get an instance by calling the [`messaging`]
+/// method of the [`V2`] struct.
+///
+/// [`V2`]: ../struct.V2.html
+/// [`messaging`]: ../struct.V2.html#method.messaging
 pub struct Messaging<'a> {
     art_client: &'a ArtStation,
 }

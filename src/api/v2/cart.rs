@@ -2,6 +2,10 @@ use crate::api::ArtStationApi;
 use crate::ApiRequestBuilder;
 use crate::ArtStation;
 
+/// This struct reflects the shopping cart endpoint. You get an instance by calling the [`cart`]
+/// method of the [`V2`] struct.
+///
+/// [`cart`]: ./struct.V2.html#method.cart
 pub struct Cart<'a> {
     art_client: &'a ArtStation,
 }

@@ -3,6 +3,10 @@ use crate::api::ArtStationApi;
 use crate::ApiRequestBuilder;
 use crate::ArtStation;
 
+/// This struct reflects the conversations endpoint. You get an instance by calling the [`conversations`]
+/// method of the [`Messaging`] struct.
+///
+/// [`conversations`]: ./struct.Messaging.html#method.conversations
 pub struct Conversations<'a> {
     art_client: &'a ArtStation,
 }

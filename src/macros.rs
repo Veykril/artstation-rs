@@ -36,7 +36,7 @@ macro_rules! impl_generic_json_response {
         $(
             impl crate::request::response::ArtStationResponse for $name {
                 type Output = Self;
-                fn from_reqwest_response(mut response: crate::reqwest::Response) -> reqwest::Result<Self> {
+                fn from_reqwest_response(mut response: reqwest::Response) -> reqwest::Result<Self> {
                     Ok(response.json()?)
                 }
             }

@@ -1,3 +1,5 @@
+///! Currently unused, will stay this way hopefully
+
 use reqwest;
 
 use std::{error::Error as StdError, fmt};

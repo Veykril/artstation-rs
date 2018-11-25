@@ -2,6 +2,11 @@ use super::ArtStationApi;
 use crate::request::{request_types::*, ApiRequestBuilder};
 use crate::ArtStation;
 
+/// This struct offers builder methods for anything related to the front page of the site. You get
+/// an instance by calling the [`front_page`] method of the ArtStation struct. The client does not
+/// have to be logged in for any of these requests.
+///
+/// [`front_page`]: ../struct.ArtStation.html#method.front_page
 pub struct FrontPageApi<'a> {
     art_client: &'a ArtStation,
 }

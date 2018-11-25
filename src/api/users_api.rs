@@ -9,15 +9,20 @@ static LIKES: &str = "/likes.json";
 static SUBMISSIONS: &str = "/likes.json";
 static PROFILE: &str = ".json";
 
-pub struct UserApi<'a, 'b> {
+/// This struct offers builder methods for anything related to user profiles. You get an instance by
+/// calling the [`user`] method of the ArtStation struct. The client does not have to be logged in
+/// for any of these requests.
+///
+/// [`user`]: ../struct.ArtStation.html#method.user
+pub struct UsersApi<'a, 'b> {
     art_client: &'a ArtStation,
     name: &'b str,
 }
 
-impl<'a, 'b> UserApi<'a, 'b> {
+impl<'a, 'b> UsersApi<'a, 'b> {
     #[inline]
     pub(crate) fn new(art_client: &'a ArtStation, name: &'b str) -> Self {
-        UserApi { art_client, name }
+        UsersApi { art_client, name }
     }
 
     pub fn profile(&self) -> ApiRequestBuilder<ProfileRequest> {
@@ -45,7 +50,7 @@ impl<'a, 'b> UserApi<'a, 'b> {
     }
 }
 
-impl<'a, 'b> ArtStationApi for UserApi<'a, 'b> {
+impl<'a, 'b> ArtStationApi for UsersApi<'a, 'b> {
     fn craft_url(&self, endpoint: &str) -> String {
         [ArtStation::URL, "/users/", self.name, endpoint, ".json"].concat()
     }

@@ -3,6 +3,10 @@ use crate::api::ArtStationApi;
 use crate::ApiRequestBuilder;
 use crate::ArtStation;
 
+/// This struct reflects the notifications endpoint. You get an instance by calling the [`notifications`]
+/// method of the [`V2`] struct.
+///
+/// [`notifications`]: ./struct.V2.html#method.notifications
 pub struct Notifications<'a> {
     art_client: &'a ArtStation,
 }

@@ -1,6 +1,5 @@
 use super::response::ArtStationResponse;
 use super::response::JsonPagedResponse;
-use super::ApiRequestBuilder;
 use super::ArtStationRequest;
 use serde::de::DeserializeOwned;
 

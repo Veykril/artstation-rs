@@ -1,5 +1,6 @@
+pub mod messaging;
+
 mod cart;
-mod messaging;
 mod notifications;
 
 pub use self::cart::Cart;
@@ -8,6 +9,11 @@ pub use self::notifications::Notifications;
 use self::messaging::Messaging;
 use crate::ArtStation;
 
+/// This struct offers access to the api v2 endpoints. You get an instance by calling the [`v2`]
+/// method of the ArtStation struct. All of the requests done from here onwards only work if the
+/// client is logged in, otherwise the response will be an error status code.
+///
+/// [`v2`]: ../../struct.ArtStation.html#method.v2
 pub struct V2<'a> {
     art_client: &'a ArtStation,
 }
@@ -33,9 +39,12 @@ impl<'a> V2<'a> {
     }
 }
 
-use crate::json_def::v2::UnreadCount;
-use crate::request::query::IncludeMarketplaceQuery;
+pub(crate) use self::private::UnreadCountRequest;
+mod private {
+    use crate::json_def::v2::UnreadCount;
+    use crate::request::query::IncludeMarketplaceQuery;
 
-make_request! {
-    UnreadCountRequest = UnreadCount with IncludeMarketplaceQuery;
+    make_request! {
+        UnreadCountRequest = UnreadCount with IncludeMarketplaceQuery;
+    }
 }
