@@ -1,4 +1,4 @@
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Submission {
     pub id: i64,
     pub user_id: i64,
@@ -13,20 +13,20 @@ pub struct Submission {
     pub challenge: Challenge,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Challenge {
     pub id: i64,
     pub title: String,
     pub contest: Contest,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Contest {
     pub slug: String,
     pub title: String,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct User {
     pub id: i64,
     pub username: String,

@@ -36,10 +36,10 @@ where
     Ok(opt.unwrap_or_default())
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct UnknownField;
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct DataWrap<T: Sized> {
     data: T,
 }

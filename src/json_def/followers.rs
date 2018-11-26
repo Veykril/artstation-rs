@@ -1,7 +1,7 @@
 use super::shared::Skill;
 use super::shared::SoftwareItem;
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Follower {
     pub id: i64,
     pub username: String,

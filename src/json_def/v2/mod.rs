@@ -7,13 +7,13 @@ use reqwest::Result;
 
 use crate::request::response::ArtStationResponse;
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Current {
     total_amount: i64,
     cart_items: Vec<()>, //unknown
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Count {
     count: i64,
 }
@@ -25,12 +25,12 @@ impl ArtStationResponse for Count {
     }
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct UnreadCount {
     data: UnreadCountInner,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct UnreadCountInner {
     unread: i64,
 }

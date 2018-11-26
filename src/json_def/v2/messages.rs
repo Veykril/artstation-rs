@@ -1,4 +1,4 @@
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Permissions {
     allowed: bool,
     intro_text: String,

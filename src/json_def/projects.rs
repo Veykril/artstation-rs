@@ -1,6 +1,6 @@
 use super::shared::{Cover, Icons};
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Project {
     pub id: i64,
     pub user_id: i64,

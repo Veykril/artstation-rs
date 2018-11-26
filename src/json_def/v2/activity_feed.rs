@@ -1,4 +1,4 @@
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct UserFeeds {
     id: String,
     #[serde(rename = "type")]
@@ -8,7 +8,7 @@ pub struct UserFeeds {
     project: Option<Project>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Followee {
     id: i64,
     username: String,
@@ -26,13 +26,13 @@ pub struct Followee {
     sample_projects: Vec<SampleProject>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct SampleProject {
     id: i64,
     cover_url: String,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct LastActor {
     id: i64,
     username: String,
@@ -44,7 +44,7 @@ pub struct LastActor {
     headline: Option<String>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Project {
     id: i64,
     url: String,
@@ -68,7 +68,7 @@ pub struct Project {
     comments: Comments,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Asset {
     id: i64,
     asset_type: AssetType,
@@ -79,13 +79,13 @@ pub struct Asset {
     large_image_url: String,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Comments {
     total_count: i64,
     data: Vec<ChildCommentElement>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct ChildCommentElement {
     id: i64,
     text_as_html: String,
@@ -98,7 +98,7 @@ pub struct ChildCommentElement {
     child_comments: Option<Vec<ChildCommentElement>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct User {
     id: i64,
     username: String,
@@ -108,7 +108,7 @@ pub struct User {
     pro_member: bool,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Icons {
     video: bool,
     image: bool,
@@ -118,7 +118,7 @@ pub struct Icons {
     pano: bool,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub enum Type {
     #[serde(rename = "followee_followed")]
     FolloweeFollowed,
@@ -126,7 +126,7 @@ pub enum Type {
     ProjectLiked,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub enum AssetType {
     #[serde(rename = "image")]
     Image,
