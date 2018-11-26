@@ -26,6 +26,13 @@ where
     }
 }
 
+impl ArtStationResponse for () {
+    type Output = ();
+    fn from_reqwest_response(_response: reqwest::Response) -> Result<Self::Output> {
+        Ok(())
+    }
+}
+
 #[derive(Debug, Deserialize)]
 #[serde(bound = "R: DeserializeOwned")]
 pub struct JsonPagedResponse<R: DeserializeOwned> {

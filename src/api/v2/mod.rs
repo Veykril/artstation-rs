@@ -1,11 +1,13 @@
 pub mod messaging;
 pub mod request_types;
 
+mod activity_feed;
 mod cart;
 mod notifications;
 
 pub use self::cart::Cart;
 pub use self::notifications::Notifications;
+pub use self::activity_feed::ActivityFeed;
 
 use self::messaging::Messaging;
 use crate::ArtStation;
@@ -37,5 +39,9 @@ impl<'a> V2<'a> {
 
     pub fn messaging(&self) -> Messaging {
         Messaging::new(self.art_client)
+    }
+
+    pub fn activiy_feed(&self) -> ActivityFeed {
+        ActivityFeed::new(self.art_client)
     }
 }

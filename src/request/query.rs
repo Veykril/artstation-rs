@@ -28,6 +28,8 @@ define_query! {
     FeaturedQuery featured: bool;
     AlbumIdQuery album_id: u32;
     IncludeMarketplaceQuery include_marketplace: bool;
+    LatestQuery latest: bool;
+    UserId user_id: u32;
 }
 
 #[derive(Serialize)]

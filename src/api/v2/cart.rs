@@ -1,6 +1,9 @@
 use crate::{
     api::{
-        v2::{request_types::CountRequest, V2},
+        v2::{
+            request_types::{CountRequest, CurrentRequest},
+            V2,
+        },
         ArtStationApi,
     },
     ApiRequestBuilder, ArtStation,
@@ -22,6 +25,10 @@ impl<'a> Cart<'a> {
 
     pub fn count(&self) -> ApiRequestBuilder<CountRequest> {
         ApiRequestBuilder::get(self.art_client, &self.craft_url("count"))
+    }
+
+    pub fn current(&self) -> ApiRequestBuilder<CurrentRequest> {
+        ApiRequestBuilder::get(self.art_client, &self.craft_url("current"))
     }
 }
 

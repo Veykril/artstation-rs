@@ -3,13 +3,16 @@
 use crate::{json_def::*, query::*, request::response::*};
 
 make_request! {
-    ProjectsRequest = JsonPagedResponse<Project> with AlbumIdQuery;
-    ProfileRequest = Profile;
+    CampaignInfoRequest = Campaign with SizeQuery, TakeOverQuery;
     FollowersRequest = JsonPagedResponse<Follower>;
     FollowingsRequest = JsonPagedResponse<Follower>;
-    SubmissionsRequest = JsonPagedResponse<Submission>;
+    HoverCardRequest = HoverCard;
+    JobsRequest = Vec<Job> with FeaturedQuery, LimitQuery, LatestQuery;
     LikesRequest = JsonPagedResponse<Like>;
+    ProfileRequest = Profile;
+    ProjectsRequest = JsonPagedResponse<Project> with AlbumIdQuery;
+    QuickRequest = Profile;
+    RandomProjectsRequest = JsonPagedResponse<Project>;
+    SubmissionsRequest = JsonPagedResponse<Submission>;
     TopRowItemsRequest = Vec<TopRowItem> with LimitQuery;
-    CampaignInfoRequest = Campaign with SizeQuery, TakeOverQuery;
-    JobsRequest = Vec<Job> with FeaturedQuery, LimitQuery;
 }

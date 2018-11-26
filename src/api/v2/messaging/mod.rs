@@ -1,6 +1,10 @@
-mod conversations;
+pub mod request_types;
 
-use self::conversations::Conversations;
+mod conversations;
+pub use self::conversations::Conversations;
+mod messages;
+pub use self::messages::Messages;
+
 use crate::ArtStation;
 
 /// This struct offers access to the v2 messaging endpoints. You get an instance by calling the [`messaging`]
@@ -22,5 +26,9 @@ impl<'a> Messaging<'a> {
 
     pub fn conversations(&self) -> Conversations {
         Conversations::new(self.art_client)
+    }
+
+    pub fn messages(&self) -> Messages {
+        Messages::new(self.art_client)
     }
 }

@@ -55,5 +55,5 @@ where
 }
 
 impl_generic_json_response! {
-    Campaign, Follower, TopRowItem, Job, Like, Profile, Project, Submission
+    Campaign, Follower, TopRowItem, Job, Like, Profile, Project, Submission, HoverCard
 }

@@ -40,6 +40,23 @@ impl<'a, 'b> UsersApi<'a, 'b> {
     pub fn submissions(&self) -> ApiRequestBuilder<SubmissionsRequest> {
         ApiRequestBuilder::get(self.art_client, &self.craft_url("/submissions"))
     }
+
+    pub fn random_projects(&self) -> ApiRequestBuilder<RandomProjectsRequest> {
+        ApiRequestBuilder::get(self.art_client, &self.craft_url("/random_projects"))
+    }
+
+    pub fn hover_card(&self) -> ApiRequestBuilder<HoverCardRequest> {
+        ApiRequestBuilder::get(self.art_client, &self.craft_url("/hovercard"))
+    }
+
+    pub fn quick(&self) -> ApiRequestBuilder<QuickRequest> {
+        ApiRequestBuilder::get(self.art_client, &self.craft_url("/quick"))
+    }
+
+    /* This request ignores the name and requires you to be logged in
+    pub fn summary(&self) -> ApiRequestBuilder<SummaryRequest> {
+        ApiRequestBuilder::get(self.art_client, &[ArtStation::URL, "/users/summary.json"].concat())
+    }*/
 }
 
 impl<'a, 'b> ArtStationApi for UsersApi<'a, 'b> {

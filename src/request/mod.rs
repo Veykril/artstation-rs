@@ -16,6 +16,10 @@ pub trait ArtStationRequest {
     type Response: ArtStationResponse;
 }
 
+impl crate::request::ArtStationRequest for () {
+    type Response = ();
+}
+
 /// An `ApiRequestBuilder` is what you use to make a request. You cannot create one by itself,
 /// you have to use the builder functions of the [`ArtStation`] instead to make one. It is generic over
 /// its [`ArtStationRequest`] so that you may only append queries that make sense for the given
@@ -35,20 +39,19 @@ impl<'a, R: ArtStationRequest> ApiRequestBuilder<'a, R> {
         }
     }
 
+    #[inline]
     pub(crate) fn get<U: IntoUrl>(art_client: &'a ArtStation, url: U) -> Self {
-        ApiRequestBuilder {
-            request_builder: art_client.client.get(url),
-            art_client,
-            _pd: PhantomData,
-        }
+        Self::new(art_client, Method::GET, url)
     }
 
+    #[inline]
     pub(crate) fn post<U: IntoUrl>(art_client: &'a ArtStation, url: U) -> Self {
-        ApiRequestBuilder {
-            request_builder: art_client.client.post(url),
-            art_client,
-            _pd: PhantomData,
-        }
+        Self::new(art_client, Method::POST, url)
+    }
+
+    #[inline]
+    pub(crate) fn put<U: IntoUrl>(art_client: &'a ArtStation, url: U) -> Self {
+        Self::new(art_client, Method::PUT, url)
     }
 
     /// Sends this request without converting it to its designated output type, giving you the

@@ -5,6 +5,24 @@ use super::shared::SoftwareItem;
 use super::UnknownField;
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct HoverCard {
+    followed: bool,
+    following_back: bool,
+    blocked: bool,
+    is_staff: bool,
+    id: i64,
+    medium_avatar_url: String,
+    small_cover_url: String,
+    permalink: String,
+    headline: String,
+    full_name: String,
+    pro_member: bool,
+    followers_count: i64,
+    project_views_count: i64,
+    projects_likes_count: i64,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Profile {
     pub followed: bool,
     pub blocked: bool,

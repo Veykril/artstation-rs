@@ -23,6 +23,10 @@ impl<'a> Notifications<'a> {
     pub fn unread_count(&self) -> ApiRequestBuilder<UnreadCountRequest> {
         ApiRequestBuilder::get(self.art_client, &self.craft_url("unread_count"))
     }
+
+    pub fn mark_all_as_read(&self) -> ApiRequestBuilder<()> {
+        ApiRequestBuilder::put(self.art_client, &self.craft_url("mark_all_as_read"))
+    }
 }
 
 impl<'a> ArtStationApi for Notifications<'a> {

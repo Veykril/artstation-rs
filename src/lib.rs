@@ -23,7 +23,7 @@
 //!
 //! ```rust,no_run
 //! # extern crate artstation;
-//! # use artstation::{ArtStation, RequestBuilder};
+//! # use artstation::{ArtStation, ApiRequestBuilder};
 //! # fn main() {
 //! #   let artstation = ArtStation::new().unwrap();
 //! #   artstation.login("your@mail.com", "hunter2");
