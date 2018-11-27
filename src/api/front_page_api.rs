@@ -25,11 +25,11 @@ impl<'a> FrontPageApi<'a> {
     }
 
     pub fn projects(&self) -> ApiRequestBuilder<ProjectsRequest> {
-        ApiRequestBuilder::get(self.art_client, &self.craft_url("/PROJECTS"))
+        ApiRequestBuilder::get(self.art_client, &self.craft_url("/projects"))
     }
 
     pub fn jobs(&self) -> ApiRequestBuilder<JobsRequest> {
-        ApiRequestBuilder::get(self.art_client, &self.craft_url("/JOBS"))
+        ApiRequestBuilder::get(self.art_client, &self.craft_url("/jobs"))
     }
 }
 

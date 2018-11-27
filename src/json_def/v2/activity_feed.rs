@@ -1,5 +1,7 @@
+use crate::json_def::v2::shared::LastActor;
+
 #[derive(Clone, Debug, Deserialize)]
-pub struct UserFeeds {
+pub struct UserFeed {
     id: String,
     #[serde(rename = "type")]
     datum_type: Type,
@@ -30,18 +32,6 @@ pub struct Followee {
 pub struct SampleProject {
     id: i64,
     cover_url: String,
-}
-
-#[derive(Clone, Debug, Deserialize)]
-pub struct LastActor {
-    id: i64,
-    username: String,
-    medium_avatar_url: String,
-    artstation_profile_url: String,
-    is_staff: Option<bool>,
-    pro_member: bool,
-    full_name: String,
-    headline: Option<String>,
 }
 
 #[derive(Clone, Debug, Deserialize)]

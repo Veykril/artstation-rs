@@ -10,7 +10,9 @@ make_request! {
     JobsRequest = Vec<Job> with FeaturedQuery, LimitQuery, LatestQuery;
     LikesRequest = JsonPagedResponse<Like>;
     ProfileRequest = Profile;
-    ProjectsRequest = JsonPagedResponse<Project> with AlbumIdQuery;
+    UserProjectsRequest = JsonPagedResponse<Project>
+        with AlbumIdQuery, CategoryQuery, MarmorSetQuery, PanoQuery, SketchfabQuery, VideoQuery, SortingQuery;
+    ProjectsRequest = JsonPagedResponse<Project> with RandomizeQuery;
     QuickRequest = Profile;
     RandomProjectsRequest = JsonPagedResponse<Project>;
     SubmissionsRequest = JsonPagedResponse<Submission>;

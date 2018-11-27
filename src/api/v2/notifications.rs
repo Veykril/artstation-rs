@@ -1,6 +1,9 @@
 use crate::{
     api::{
-        v2::{request_types::UnreadCountRequest, V2},
+        v2::{
+            request_types::{NotificationsRequest, UnreadCountRequest},
+            V2,
+        },
         ArtStationApi,
     },
     ApiRequestBuilder, ArtStation,
@@ -26,6 +29,13 @@ impl<'a> Notifications<'a> {
 
     pub fn mark_all_as_read(&self) -> ApiRequestBuilder<()> {
         ApiRequestBuilder::put(self.art_client, &self.craft_url("mark_all_as_read"))
+    }
+
+    pub fn notifications(&self) -> ApiRequestBuilder<NotificationsRequest> {
+        ApiRequestBuilder::put(
+            self.art_client,
+            &[ArtStation::URL, V2::API_BASE, "notifications.json"].concat(),
+        )
     }
 }
 

@@ -5,9 +5,9 @@ mod activity_feed;
 mod cart;
 mod notifications;
 
+pub use self::activity_feed::ActivityFeed;
 pub use self::cart::Cart;
 pub use self::notifications::Notifications;
-pub use self::activity_feed::ActivityFeed;
 
 use self::messaging::Messaging;
 use crate::ArtStation;

@@ -1,3 +1,5 @@
+use crate::json_def::shared::User;
+
 #[derive(Clone, Debug, Deserialize)]
 pub struct Submission {
     pub id: i64,
@@ -24,25 +26,4 @@ pub struct Challenge {
 pub struct Contest {
     pub slug: String,
     pub title: String,
-}
-
-#[derive(Clone, Debug, Deserialize)]
-pub struct User {
-    pub id: i64,
-    pub username: String,
-    pub first_name: String,
-    pub last_name: String,
-    pub avatar_file_name: Option<String>,
-    pub country: String,
-    pub city: String,
-    pub subdomain: String,
-    pub headline: String,
-    pub pro_member: bool,
-    pub is_staff: bool,
-    pub medium_avatar_url: String,
-    pub large_avatar_url: String,
-    pub full_name: String,
-    pub permalink: String,
-    pub artstation_profile_url: String,
-    pub location: String,
 }

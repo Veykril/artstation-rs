@@ -93,10 +93,11 @@ where
             .json::<R::Response>()?;
 
             if response_buf.capacity() == 0 {
-                response_buf.reserve_exact(response.total_count);
+                response_buf.reserve_exact(response.total());
             }
-            response_buf.append(&mut response.data);
-            if response.total_count == response_buf.len() {
+            //let total = response.total();
+            response_buf.append(response.data_mut());
+            if response.total() == response_buf.len() {
                 break Ok(response_buf);
             }
             page += 1;

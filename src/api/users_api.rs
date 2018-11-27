@@ -21,7 +21,7 @@ impl<'a, 'b> UsersApi<'a, 'b> {
         ApiRequestBuilder::get(self.art_client, &self.craft_url(""))
     }
 
-    pub fn projects(&self) -> ApiRequestBuilder<ProjectsRequest> {
+    pub fn projects(&self) -> ApiRequestBuilder<UserProjectsRequest> {
         ApiRequestBuilder::get(self.art_client, &self.craft_url("/projects"))
     }
 

@@ -2,6 +2,10 @@ mod activity_feed;
 pub use self::activity_feed::*;
 mod messages;
 pub use self::messages::*;
+mod notifications;
+pub use self::notifications::*;
+mod shared;
+pub use self::shared::*;
 
 use reqwest::Result;
 
@@ -43,5 +47,5 @@ impl ArtStationResponse for UnreadCount {
 }
 
 impl_generic_json_response! {
-    Current, UserFeeds, Permissions
+    Current, UserFeed, Permissions, Notification
 }
