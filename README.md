@@ -1,5 +1,7 @@
-# artstation
+## artstation
+
+# Cloudflare ruined this RIP
 
 A rust wrapper for the unofficial artstation api.
 
-Heavily WIP
+### Discontinued
